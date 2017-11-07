@@ -4,20 +4,33 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 
-fun goldbachList(range: IntRange) =
-        range.filter{ it % 2 == 0}.map{ it.goldbach() }
+/*
+ P41 (*) A list of Goldbach compositions.
+
+  Given a range of integers by its lower and upper limit, print a list of all even numbers and their Goldbach composition.
+  > printGoldbachList(9..20)
+  10 = 3 + 7
+  12 = 5 + 7
+  14 = 3 + 11
+  16 = 3 + 13
+  18 = 5 + 13
+  20 = 3 + 17
+ */
+fun goldbachList(range: IntRange): List<Pair<Int, Int>> {
+    // Round start & end to evens in range
+    val start = if (range.start % 2 == 1) range.start + 1 else range.start
+    val end = if (range.endInclusive % 2 == 1) range.endInclusive - 1 else range.endInclusive
+    val evenRange = (start..end) step 2
+
+    return evenRange.fold(emptyList()) { acc, n ->
+        acc + n.goldbach()
+    }
+}
 
 fun printGoldbachList(range: IntRange) =
-        goldbachList(range).forEach { println(it.toStringSum()) }
-
-fun goldbachListLimited(range: IntRange, minPrime: Int) =
-        goldbachList(range).filter { it.first > minPrime && it.second > minPrime }
-
-fun printGoldbachListLimited(range: IntRange, minPrime: Int) =
-        goldbachListLimited(range, minPrime).forEach { println(it.toStringSum()) }
-
-private fun Pair<Int, Int>.toStringSum() = "${first + second} = $first + $second"
-
+        goldbachList(range).forEach { goldbach  ->
+            println("${goldbach.first + goldbach.second} = ${goldbach.first} + ${goldbach.second}")
+        }
 
 class P41Test {
     @Test fun `list of Goldbach compositions`() {
@@ -32,19 +45,4 @@ class P41Test {
         )))
     }
 
-    @Test fun `limited list of Goldbach compositions`() {
-        printGoldbachListLimited(2..3000, 50)
-        assertThat(goldbachListLimited(2..3000, 50), equalTo(listOf(
-            Pair(73, 919),
-            Pair(61, 1321),
-            Pair(67, 1789),
-            Pair(61, 1867),
-            Pair(61, 2017),
-            Pair(61, 2377),
-            Pair(53, 2459),
-            Pair(53, 2477),
-            Pair(61, 2557),
-            Pair(103, 2539)
-        )))
-    }
 }

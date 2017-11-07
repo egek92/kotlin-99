@@ -4,10 +4,21 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 
+/*
+ P36 (*) Determine the prime factors of a given positive integer (2).
+
+ Construct a list containing prime factors and their multiplicity.
+
+ > 315.primeFactorMultiplicity()
+ [(3, 2), (5, 1), (7, 1)]
+ */
 fun Int.primeFactorMultiplicity(): List<Pair<Int, Int>> =
-    this.primeFactors()
-        .groupBy { it }
-        .map { Pair(it.key, it.value.size) }
+    primeFactors().fold(emptyList()) { acc, prime ->
+        if (acc.isNotEmpty() && acc.last().first == prime)
+            acc.dropLast(1)  + Pair(prime, acc.last().second + 1)
+        else
+            acc + Pair(prime, 1)
+    }
 
 class P36Test {
     @Test fun `determine the prime factors of a given positive integer (2)`() {

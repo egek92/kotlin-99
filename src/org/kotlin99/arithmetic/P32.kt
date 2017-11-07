@@ -4,10 +4,13 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 
+/*
+ P32 (**) Determine the greatest common divisor of two positive integer numbers.
+ Use Euclid's algorithm (https://en.wikipedia.org/wiki/Euclidean_algorithm)
+ */
 fun gcd(a: Int, b: Int): Int =
-    if (a == 0) b
-    else if (a > b) gcd(b, a)
-    else gcd(b % a, a)
+        if (b == 0) a
+        else gcd(b, a % b)
 
 class P32Test {
     @Test fun `greatest common divisor of two positive integer numbers`() {
