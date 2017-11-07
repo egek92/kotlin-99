@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kotlin-99.iml" filepath="$PROJECT_DIR$/kotlin-99.iml" />
+      <module fileurl="file://$PROJECT_DIR$/99-problems-kotlin.iml" filepath="$PROJECT_DIR$/99-problems-kotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/99-problems-kotlin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/99-problems-kotlin_main.iml" group="99-problems-kotlin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/99-problems-kotlin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/99-problems-kotlin_test.iml" group="99-problems-kotlin" />
     </modules>
   </component>
 </project>
