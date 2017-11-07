@@ -471,7 +471,24 @@ A binary tree is either empty or it is composed of a root element and two succes
 
 ![binary tree][binary-tree]
 
-**NOTE**: replaced Binary Tree implementation. Ignore the following.
+**NOTE**: replaced Binary Tree implementation.
+
+``` kotlin
+sealed class Tree {
+    class Node<out T>(val value: T, val left: Tree? = EmptyNode, val right: Tree? = EmptyNode) : Tree() {
+        override fun toString(): String {
+            val children = if (left == EmptyNode && right == EmptyNode) "" else " $left $right"
+            return "T($value$children)"
+        }
+    }
+    object EmptyNode : Tree() {
+        override fun toString() = "."
+    }
+}
+```
+
+**Notes for original implementation**
+[original Tree.kt](https://github.com/dkandalov/kotlin-99/blob/master/src/org/kotlin99/binarytrees/Tree.kt)
 
 We will use the following classes to represent binary trees (see [Tree.kt](https://github.com/dkandalov/kotlin-99/blob/master/src/org/kotlin99/binarytrees/Tree.kt)). 
 An ``End`` is equivalent to an empty tree. A ``Node`` has a value, and two descendant trees. 
@@ -482,7 +499,8 @@ Note the usage of [variance annotation](https://kotlinlang.org/docs/reference/ge
 must have at least one constructor parameter.
 ``End`` has type parameter of ``Nothing`` which is a subtype of every other type.
 
-``` kotlin
+```kotlin
+/* Original */
 interface Tree<out T>
 
 data class Node<out T>(val value: T, val left: Tree<T> = End, val right: Tree<T> = End) : Tree<T> {

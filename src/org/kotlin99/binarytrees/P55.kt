@@ -2,44 +2,41 @@ package org.kotlin99.binarytrees
 
 import com.natpryce.hamkrest.assertion.assertThat
 import org.junit.Test
-import org.kotlin99.binarytrees.Tree.End
 import org.kotlin99.binarytrees.Tree.Node
 import org.kotlin99.common.containsAll
 
-fun <T> balancedTrees(treeSize: Int, value: T): List<Tree<T>> {
-    return if (treeSize == 0) listOf(End)
-    else if (treeSize == 1) listOf(Node(value))
-    else {
-        val n = (treeSize - 1) / 2
-        val subTrees1 = balancedTrees(n, value)
-        val subTrees2 = balancedTrees((treeSize - 1) - n, value)
-        subTrees1.flatMap { tree1 ->
-            subTrees2.flatMap { tree2 ->
-                listOf(Node(value, tree1, tree2), Node(value, tree2, tree1))
-            }
-        }.distinct()
-    }
+/*
+ P55 (*) Construct completely balanced binary trees.
+
+ In a completely balanced binary tree, the following property holds for every node.
+ The number of nodes in its left subtree and the number of nodes in its right subtree are almost equal,
+ which means their difference is not greater than one. Define an object named Tree. Write a function balancedTrees to
+ construct completely balanced binary trees for a given number of nodes. The function should generate all solutions.
+ The function should take as parameters the number of nodes and a single value to put in all of them.
+ */
+fun <T> balancedTrees(treeSize: Int, value: T): List<Tree> {
+    TODO()
 }
 
 class P55Test {
-    @Test fun `construct all balanced trees`() {
-        assertThat(balancedTrees(1, "x"), containsAll(nodeList(Node("x"))))
-        assertThat(balancedTrees(2, "x"), containsAll(nodeList(
-            Node("x", End, Node("x")),
-            Node("x", Node("x"), End)
-        )))
-        assertThat(balancedTrees(3, "x"), containsAll(nodeList(
-            Node("x", Node("x"), Node("x"))
-        )))
-        assertThat(balancedTrees(4, "x"), containsAll(nodeList(
-            Node("x", Node("x"), Node("x", End, Node("x"))),
-            Node("x", Node("x", End, Node("x")), Node("x")),
-            Node("x", Node("x"), Node("x", Node("x"), End)),
-            Node("x", Node("x", Node("x"), End), Node("x"))
-        )))
-    }
-
-    companion object {
-        fun nodeList(vararg nodes: Node<String>): Iterable<Tree<String>> = nodes.asList()
-    }
+//    @Test fun `construct all balanced trees`() {
+//        assertThat(balancedTrees(1, "x"), containsAll(nodeList(Node("x"))))
+//        assertThat(balancedTrees(2, "x"), containsAll(nodeList(
+//                Node("x", End, Node("x")),
+//                Node("x", Node("x"), End)
+//        )))
+//        assertThat(balancedTrees(3, "x"), containsAll(nodeList(
+//                Node("x", Node("x"), Node("x"))
+//        )))
+//        assertThat(balancedTrees(4, "x"), containsAll(nodeList(
+//                Node("x", Node("x"), Node("x", End, Node("x"))),
+//                Node("x", Node("x", End, Node("x")), Node("x")),
+//                Node("x", Node("x"), Node("x", Node("x"), End)),
+//                Node("x", Node("x", Node("x"), End), Node("x"))
+//        )))
+//    }
+//
+//    companion object {
+//        fun nodeList(vararg nodes: Node<String>): Iterable<Tree> = nodes.asList()
+//    }
 }
