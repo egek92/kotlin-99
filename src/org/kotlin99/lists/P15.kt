@@ -5,8 +5,18 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 import java.util.*
 
+/*
+ P15(**) Duplicate the elements of a list a given number of times.
+
+ Example:
+
+ > duplicateN(3, "abccd".toList())
+ [a, a, a, b, b, b, c, c, c, c, c, c, d, d, d]
+ */
 fun <T> duplicateN(n: Int, list: List<T>): List<T> =
-    list.flatMap { Collections.nCopies(n, it) }
+        list.fold(emptyList()) { acc, element ->
+            acc + Collections.nCopies(n, element)
+        }
 
 class P15Test {
     @Test fun `duplicate the elements of a list a given number of times`() {

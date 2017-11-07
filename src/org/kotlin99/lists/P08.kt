@@ -4,11 +4,20 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 
-fun <T> compress(list: List<T>) =
-    list.fold(emptyList<T>()) { result, value ->
-        if (result.isNotEmpty() && result.last() == value) result
-        else result + value
-    }
+/*
+ P08 (**) Eliminate consecutive duplicates of list elements.
+
+ If a list contains repeated elements, they should be replaced with a single copy of the element. The order of the elements should not be changed.
+ Example:
+ > compress("aaaabccaadeeee".toList())
+ [a, b, c, a, d, e]
+ */
+fun <T> compress(list: List<T>): List<T> =
+        list.fold(emptyList()) { result, element ->
+            if (result.isEmpty() || result.last() != element)
+                result + element
+            else result
+        }
 
 class P08Test {
     @Test fun `eliminate consecutive duplicates of list elements`() {

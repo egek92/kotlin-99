@@ -4,6 +4,12 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 
+// P22 (*) Create a list containing all integers within a given range.
+//
+// Example:
+//
+// > range(4, 9)
+// [4, 5, 6, 7, 8, 9]
 fun range(from: Int, to: Int): List<Int> = (from..to).toList()
 
 class P22Test {

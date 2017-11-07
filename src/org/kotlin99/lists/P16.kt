@@ -4,10 +4,17 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 
-fun <T> drop(n: Int, list: List<T>): List<T> = list
-    .mapIndexed { i: Int, value: T -> Pair(i, value) }
-    .filter { (it.first + 1) % n != 0 }
-    .map { it.second }
+/*
+ P16 (**) Drop every Nth element from a list.
+ Example:
+ > drop(3, "abcdefghijk".toList())
+ [a, b, d, e, g, h, j, k]
+ */
+fun <T> drop(n: Int, list: List<T>): List<T> =
+        list.foldIndexed(emptyList()) { i, acc, el ->
+            if ((i + 1) % n == 0) acc
+            else acc + el
+        }
 
 class P16Test {
     @Test fun `drop every Nth element from a list`() {

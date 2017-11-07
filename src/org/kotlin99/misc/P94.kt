@@ -10,7 +10,16 @@ import org.kotlin99.graphs.Graph.TermForm
 import org.kotlin99.graphs.Graph.TermForm.Term
 import org.kotlin99.graphs.isIsomorphicTo
 import org.kotlin99.graphs.toGraph
-import org.kotlin99.lists.combinations
+
+/* From P26 - the solution produces combinations in unsorted order */
+fun <T> combinations(n: Int, list: List<T>): List<List<T>> =
+        if (n == 0) listOf(emptyList())
+        else list.flatMapTails { subList ->
+            combinations(n - 1, subList.tail()).map { (it + subList.first()) }
+        }
+private fun <T> List<T>.flatMapTails(f: (List<T>) -> (List<List<T>>)): List<List<T>> =
+        if (isEmpty()) emptyList()
+        else f(this) + this.tail().flatMapTails(f)
 
 
 fun findAllRegularGraphs(degree: Int, nodeAmount: Int): List<Graph<Int, Nothing>> {

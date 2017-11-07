@@ -5,7 +5,13 @@ import com.natpryce.hamkrest.equalTo
 import org.junit.Test
 import java.util.*
 
-fun <T> List<T>.tail(): List<T> = drop(1)
+/*
+ * Return a list containing the contents of this list except for the first and last elements.
+ */
+fun <T> List<T>.dropFirstAndLast() = slice(1 until this.lastIndex)
+
+val <T> List<T>.head: T
+    get() = first()
 
 fun <T> Array<out T>.tail(): List<T> = drop(1)
 
